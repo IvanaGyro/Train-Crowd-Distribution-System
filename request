@@ -1,0 +1,4 @@
+POST
+FieldStorage(None, None, [])
+{'fp': <cStringIO.StringI object at 0x02BF9C38>, 'disposition_options': {}, 'innerboundary': '', 'name': None, 'list': [], 'filename': None, 'keep_blank_values': 0, 'headers': {'content-type': 'application/x-www-form-urlencoded'}, 'length': -1, 'done': 0, 'disposition': '', 'qs_on_post': None, 'strict_parsing': 0, 'file': None, 'outerboundary': '', 'type_options': {}, 'type': 'application/x-www-form-urlencoded'}
+

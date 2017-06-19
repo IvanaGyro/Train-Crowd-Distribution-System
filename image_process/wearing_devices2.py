@@ -11,18 +11,19 @@ dataDc = {}
 for file in os.listdir('.'):
 	if not os.path.isfile(file):
 		continue
-	print file
 	data = {}
 	fn, extFn = os.path.splitext(file)
 	if extFn == '.py':
 		continue
 	if extFn == '.p':
-		fn, res, data['PostLv'] = fn.split('-')
+		crowdLvHuman, fn, res, data['PostLv'] = fn.split('-')
 		data['Res'] = tuple(int(val) for val in res.split('_'))
+		data['CrowdLvHuman'] = crowdLvHuman
 		with open(file, 'rb') as fd:		
 			data['BlkSizes'] = pickle.load(fd)
 	else:
 		data['ImgFn'] = file
+		crowdLvHuman, fn = fn.split('-')
 	if fn not in dataDc:
 		dataDc[fn] = data
 	else:
@@ -42,6 +43,7 @@ for fn, data in dataDc.iteritems():
 	data['QuietMin'] = min(quietSizeLs)
 	data['QuietHist'], data['Bins'] = np.histogram(quietSizeLs, bins=bins)
 	print 'filename:', fn
+	print 'crowd level - human eye:', data['CrowdLvHuman']
 	print 'mean:', data['QuietMean']
 	print 'std:', data['QuietStd']
 	print 'var:', data['QuietVar']
