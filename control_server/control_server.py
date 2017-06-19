@@ -40,6 +40,7 @@ class TransferRequestHandler(BaseHTTPRequestHandler):
 
 		if action == 'calcu':
 			if 'pic' not in form:
+				print 'pic not in form'
 				return
 			if type(form['pic']) == type([]):
 				picField = form['pic'][0]
@@ -47,9 +48,11 @@ class TransferRequestHandler(BaseHTTPRequestHandler):
 				picField = form['pic']
 			if picField.filename:
 				destFn = os.path.join('..', 'image_process', picField.filename)
+				print destFn
 				with open(destFn, 'wb') as fd:
 					fd.write(picField.value)
 				self.wfile.write('OK')
+				
  
 if __name__ == '__main__':
 	from BaseHTTPServer import HTTPServer
