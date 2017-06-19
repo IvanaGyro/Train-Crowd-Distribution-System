@@ -206,7 +206,7 @@ if __name__ == '__main__':
 		if not os.path.isfile(file):
 			continue
 		fn, extFn = os.path.splitext(file)
-		if extFn != '.p' and extFn != '.py':
+		if extFn in ['.jpg', '.png']:
 			imagePath = file
 			sizeLs = get_block_size_ls(imagePath, (reWidth, reHeight), postLv)
 			with open('%s-%s_%s-%s.p' %(os.path.splitext(imagePath)[0], reWidth, reHeight, postLv), 'wb') as fd:
