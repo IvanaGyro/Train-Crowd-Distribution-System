@@ -7,6 +7,7 @@ import os
 import sys
 import pickle
 import numpy as np
+import cv2
 
 sys.setrecursionlimit(10000000)
 print sys.getrecursionlimit()
@@ -169,8 +170,12 @@ def get_block_size_ls(imagePath, resize=(640, 360), postLv=4):
 	if img.size != resize:
 		print '%s is resized from %s to %s' %(imagePath, img.size, resize)
 		img = img.resize((640, 360))
+
 	imgCorrected = equalize(img)
-	imgCa = posterize(imgCorrected, 4)
+	npim = np.array(imgCorrected) #trans to np
+	cvblur = cv2.medianBlur(npim, 7)
+	imgblur = Image.fromarray(cvblur) #trans back
+	imgCa = posterize(imgblur, 4)
 	imgCaArr = np.empty((resize[1], resize[0]), dtype='uint32')
 	for y in range(imgCaArr.shape[0]):
 		for x in range(imgCaArr.shape[1]):
@@ -202,6 +207,7 @@ if __name__ == '__main__':
 	reWidth = 640
 	reHeight = 360
 	postLv = 4
+
 	for file in os.listdir('.'):
 		if not os.path.isfile(file):
 			continue
@@ -222,4 +228,3 @@ if __name__ == '__main__':
 #proportion_resize(im2, 1.5).show()
 #proportion_resize(imgCa, 0.2).show()
 #proportion_resize(im3, 1.5).show()
-
