@@ -49,11 +49,17 @@ class TransferRequestHandler(BaseHTTPRequestHandler):
 			else:
 				picField = form['pic']
 			if picField.filename:
+				for k in form:
+					print k
+					print type(form[k])
+				print picField.filename
+				print type(picField.file)
+				print len(picField.value)
 				destFn = os.path.join('..', 'image_process', picField.filename)
 				print destFn
 				with open(destFn, 'wb') as fd:
 					fd.write(picField.value)
-				Image.open(io.BytesIO(picField)).show()
+				Image.open(io.BytesIO(picField.file.read())).show()
 				self.wfile.write('OK')
 				
  
