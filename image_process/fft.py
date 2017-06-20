@@ -11,6 +11,7 @@ for file in fnmatch.filter(os.listdir('.'), '*.jpg'):
 		img = cv2.imread(file,0) # 1 = color, 0 = grayscale
 		pim = Image.fromarray(img)
 		imgCorrected = wd.equalize(pim)
+		inal = cv2.medianBlur(source, 3)
 		pix = np.array(imgCorrected)
 		f = np.fft.fft2(pix)
 		fshift = np.fft.fftshift(f)

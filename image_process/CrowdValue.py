@@ -1,4 +1,3 @@
-import pickle
 import os
 from PIL import Image
 import numpy as np
@@ -16,8 +15,8 @@ for file in fnmatch.filter(os.listdir('.'), '*.p'):
 		continue
 	data = {}
 	fn, extFn = os.path.splitext(file)
-	if '.py' in extFn or '.csv' == extFn or '.dat' == extFn:
-		continue
+	# if '.py' in extFn or '.csv' == extFn or '.dat' == extFn:
+	# 	continue
 	if extFn == '.p':
 		crowdLvHuman, fn, res, data['PostLv'] = fn.split('-')
 		data['Res'] = tuple(int(val) for val in res.split('_'))

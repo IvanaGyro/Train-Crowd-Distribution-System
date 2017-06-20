@@ -175,7 +175,7 @@ def get_block_size_ls(imagePath, resize=(640, 360), postLv=4):
 	npim = np.array(imgCorrected) #trans to np
 	cvblur = cv2.medianBlur(npim, 7)
 	imgblur = Image.fromarray(cvblur) #trans back
-	imgCa = posterize(imgblur, 4)
+	imgCa = posterize(imgblur, postLv)
 	imgCaArr = np.empty((resize[1], resize[0]), dtype='uint32')
 	for y in range(imgCaArr.shape[0]):
 		for x in range(imgCaArr.shape[1]):

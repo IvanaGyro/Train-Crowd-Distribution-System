@@ -12,6 +12,6 @@ for file in fnmatch.filter(os.listdir('.'), '*.jpg'):
 		npim = np.array(imgCorrected) #trans to np
 		cvblur = cv2.medianBlur(npim, 3)
 		imgblur = Image.fromarray(cvblur) #trans back
-		imgCa = wd.posterize(imgblur, 4)
+		imgCa = wd.posterize(imgblur, 2)
 		imgCa.save('posterized/' + fn + '_posterized' + extFn)
 		imgCa.show()
