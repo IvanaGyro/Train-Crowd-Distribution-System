@@ -8,6 +8,8 @@ from math import *
 from matplotlib import pyplot as plt
 import random 
 
+#2017_06_05_24_24_24.123456.jpg
+
 threshold = 1
 dataDc = {}
 for file in fnmatch.filter(os.listdir('.'), '*.p'):
@@ -17,6 +19,7 @@ for file in fnmatch.filter(os.listdir('.'), '*.p'):
 	fn, extFn = os.path.splitext(file)
 	# if '.py' in extFn or '.csv' == extFn or '.dat' == extFn:
 	# 	continue
+
 	if extFn == '.p':
 		crowdLvHuman, fn, res, data['PostLv'] = fn.split('-')
 		data['Res'] = tuple(int(val) for val in res.split('_'))
