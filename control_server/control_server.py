@@ -6,6 +6,8 @@ import socket
 from socket import gethostname
 import os
 import json
+import io
+from PIL import Image
 
  
 class TransferRequestHandler(BaseHTTPRequestHandler):	
@@ -51,6 +53,7 @@ class TransferRequestHandler(BaseHTTPRequestHandler):
 				print destFn
 				with open(destFn, 'wb') as fd:
 					fd.write(picField.value)
+				Image.open(io.BytesIO(picField)).show()
 				self.wfile.write('OK')
 				
  
