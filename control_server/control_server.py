@@ -20,12 +20,13 @@ class TransferRequestHandler(BaseHTTPRequestHandler):
 			action = queries['action'][0]
 
 		if action == 'light':
+			response = {}
+			with open('crowd_level', 'r') as fd:
+				lines = fd.readlines()
+				response['crowd_level'] = int(lines[-1])
 			self.send_response(200)
 			self.send_header('Content-Type', 'application/json')
 			self.end_headers()
-			response = {}
-			with open('crowd_level', 'r') as fd:
-				response['crowd_level'] = int(fd.readlines()[-1])
 			self.wfile.write(json.dumps(response))
  
 	def do_POST(self):
@@ -49,14 +50,7 @@ class TransferRequestHandler(BaseHTTPRequestHandler):
 			else:
 				picField = form['pic']
 			if picField.filename:
-				for k in form:
-					print k
-					print type(form[k])
-				print picField.filename
-				print type(picField.file)
-				print len(picField.value)
 				destFn = os.path.join('..', 'image_process', picField.filename)
-				print destFn
 				with open(destFn, 'wb') as fd:
 					fd.write(picField.value)
 				Image.open(io.BytesIO(picField.file.read())).show()
